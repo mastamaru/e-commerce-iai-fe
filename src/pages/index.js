@@ -6,9 +6,7 @@ export default function Home() {
   return (
     <>
       <div className="flex flex-col items-center">
-        <h1 className="text-md leading-3 text-center font-sarala ">
-          RUUUDDYYYYYYYYY!
-        </h1>
+        <h1 className="text-2xl text-center font-sarala ">RUUUDDYYYYYYYYY!</h1>
         <div className="flex">
           <Image
             src="/home2.jpg"

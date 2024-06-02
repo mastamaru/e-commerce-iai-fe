@@ -5,7 +5,7 @@ export default function Navbar() {
   return (
     <>
       <section>
-        <div className="flex font-sarala items-center min-w-[100vw] h-[80px] text-primary">
+        <div className="flex font-sarala items-center min-w-[100vw] h-[80px] text-primary bg-white">
           <Image
             src="/pererek.png"
             className="ml-16 h-[44px] w-[44px]"
