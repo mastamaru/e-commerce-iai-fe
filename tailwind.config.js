@@ -9,7 +9,15 @@ module.exports = {
     "./src/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    extend: {},
+    fontFamily: {
+      sarala: ["Sarala", "sans-serif"],
+    },
+    extend: {
+      colors: {
+        //convert rgba(44, 48, 54, 1) to hex
+        primary: "#2c3036",
+      },
+    },
   },
   plugins: [],
 };
