@@ -1,11 +1,14 @@
 import Image from "next/image";
 import InputText from "../components/InputText";
+import Navbar from "@/components/Navbar";
 
 export default function Home() {
   return (
     <>
       <div className="flex flex-col items-center">
-        <h1 className="text-4xl text-center ">RUUUDDYYYYYYYYY!</h1>
+        <h1 className="text-md leading-3 text-center font-sarala ">
+          RUUUDDYYYYYYYYY!
+        </h1>
         <div className="flex">
           <Image
             src="/home2.jpg"
@@ -23,6 +26,7 @@ export default function Home() {
           />
         </div>
         <InputText label="Email" type="email" />
+        <Navbar />
       </div>
     </>
   );

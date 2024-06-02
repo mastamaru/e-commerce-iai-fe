@@ -14,8 +14,7 @@ module.exports = {
     },
     extend: {
       colors: {
-        //convert rgba(44, 48, 54, 1) to hex
-        primary: "#2c3036",
+        primary: "#2C3036",
         secondary: "#F0F0F0",
         bgprimary: "#FFFFFF",
         bgsecondary: "#D9D9D9",

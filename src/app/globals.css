@@ -6,6 +6,6 @@
   @font-face {
     font-family: "Sarala";
     font-weight: 400;
-    src: url("/font/Sarala-Regular.ttf"format("truetype"));
+    src: url("/font/Sarala-Regular.ttf"), format("truetype"));
   }
 }
