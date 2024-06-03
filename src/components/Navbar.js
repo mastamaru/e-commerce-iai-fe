@@ -2,6 +2,7 @@ import Image from "next/image";
 import { MdArrowForwardIos } from "react-icons/md";
 import clsx from "clsx";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 export default function Navbar() {
   const router = useRouter();
@@ -18,30 +19,33 @@ export default function Navbar() {
             alt="logo"
           />
           <div className="flex gap-11 items-center ml-[720px] mr-[600px] text-primary">
-            <a
-              href="/home"
-              className={clsx("text-[16.67px]", {
-                "underline font-bold": router.pathname === "/home",
-              })}
-            >
-              Home
-            </a>
-            <a
-              href="/cart"
-              className={clsx("text-[16.67px]", {
-                "underline font-bold": router.pathname === "/cart",
-              })}
-            >
-              My Cart
-            </a>
-            <a
-              href="/orders"
-              className={clsx("text-[16.67px]", {
-                "underline font-bold": router.pathname === "/orders",
-              })}
-            >
-              Orders
-            </a>
+            <Link legacyBehavior href="/home">
+              <a
+                className={clsx("text-[16.67px]", {
+                  "underline font-bold": router.pathname === "/home",
+                })}
+              >
+                Home
+              </a>
+            </Link>
+            <Link legacyBehavior href="/cart">
+              <a
+                className={clsx("text-[16.67px]", {
+                  "underline font-bold": router.pathname === "/cart",
+                })}
+              >
+                My Cart
+              </a>
+            </Link>
+            <Link legacyBehavior href="/orders">
+              <a
+                className={clsx("text-[16.67px]", {
+                  "underline font-bold": router.pathname === "/orders",
+                })}
+              >
+                Orders
+              </a>
+            </Link>
           </div>
           <div className="flex gap-2 items-center mr-16">
             <Image
