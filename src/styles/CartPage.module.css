@@ -48,15 +48,23 @@
 
 .summaryItem {
   display: flex;
-  justify-content: space-between;
-  padding: 10px 0;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.summaryItem label {
+  margin-bottom: 5px;
+}
+
+.summaryItem span {
+  display: inline-block;
+  margin-bottom: 5px;
 }
 
 .summaryItemTotal {
   font-weight: bold;
 }
 
-/* Gaya untuk tombol umum */
 .button {
   padding: 10px 20px;
   background-color: #007bff;
@@ -67,12 +75,24 @@
   font-size: 14px;
 }
 
-/* Gaya tombol ketika di-hover */
 .button:hover {
   background-color: #0056b3;
 }
 
-/* Gaya tombol ketika ditekan */
 .button:active {
   background-color: #004494;
+}
+
+.input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.select {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
 }

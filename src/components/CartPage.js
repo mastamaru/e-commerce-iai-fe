@@ -27,6 +27,9 @@ const CartPage = () => {
 
     return (
         <div className={styles.cartPage}>
+            <div>
+                <h2>Your Cart</h2>
+            </div>
             <div className={styles.cartItems}>
                 <table className={styles.cartTable}>
                     <thead>
