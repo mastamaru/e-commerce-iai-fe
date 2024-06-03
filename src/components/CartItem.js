@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "../styles/CartPage.module.css";
+import Image from "next/image";
 
 const formatPrice = (price) => {
   if (price === undefined || price === null) {
@@ -11,7 +12,12 @@ const CartItem = ({ product, onQuantityChange, onRemove }) => {
   return (
     <tr className="cart-item">
       <td>
-        <img src={product.image} alt={product.name} width="100" />
+        <Image
+          src={`/${product.image}`}
+          alt={product.name}
+          width={120}
+          height={120}
+        />
       </td>
       <td className="item-details">
         <h4>{product.name}</h4>
