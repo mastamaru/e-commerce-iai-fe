@@ -36,7 +36,7 @@ export default function Login() {
                 </button>
               </div>
               <p className="text-[16.67px] font-sarala mt-4">
-                Don't have an account?{" "}
+                Don&apos;t have account?{" "}
                 <Link legacyBehavior href="/register">
                   <a className="font-bold">Sign up here</a>
                 </Link>
