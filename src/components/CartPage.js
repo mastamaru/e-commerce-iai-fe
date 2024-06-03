@@ -64,7 +64,7 @@ const CartPage = () => {
           name: product.name,
         },
       });
-      setCartItems(cartItems.filter((item) => item.id !== product.id));
+      setCartItems(cartItems.filter((item) => item !== product));
     } catch (error) {
       console.error("Error removing product from cart:", error);
     }
