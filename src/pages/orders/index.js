@@ -75,10 +75,15 @@ export default function Orders() {
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200 font-sarala text-primary ">
-              {orders.map((order) => (
+              {orders.map((order, orderIndex) => (
                 <React.Fragment key={order._id}>
                   {order.items.map((item, index) => (
-                    <tr key={index}>
+                    <tr
+                      key={index}
+                      className={`${
+                        orderIndex % 2 === 1 ? "bg-[#BCCCEB]" : ""
+                      } border-none`}
+                    >
                       {index === 0 && (
                         <td
                           className="px-6 py-4 whitespace-nowrap text-[16.7px] leading-5"
@@ -95,10 +100,10 @@ export default function Orders() {
                           {order.date}
                         </td>
                       )}
-                      <td className="px-6 py-4 whitespace-nowrap">
+                      <td className="px-6 py-4 whitespace-nowrap  ">
                         {item.name}
                         <br />
-                        <span className="font-sarala font-bold">
+                        <span className="font-sarala font-bold ">
                           Size: {item.size}
                         </span>
                       </td>
