@@ -1,7 +1,11 @@
 import Image from "next/image";
 import { MdArrowForwardIos } from "react-icons/md";
+import clsx from "clsx";
+import { useRouter } from "next/router";
 
 export default function Navbar() {
+  const router = useRouter();
+
   return (
     <>
       <section>
@@ -14,13 +18,28 @@ export default function Navbar() {
             alt="logo"
           />
           <div className="flex gap-11 items-center ml-[720px] mr-[600px] text-primary">
-            <a href="#" className="text-[16.67px] underline font-bold">
+            <a
+              href="/home"
+              className={clsx("text-[16.67px]", {
+                "underline font-bold": router.pathname === "/home",
+              })}
+            >
               Home
             </a>
-            <a href="#" className="text-[16.67px]">
+            <a
+              href="/cart"
+              className={clsx("text-[16.67px]", {
+                "underline font-bold": router.pathname === "/cart",
+              })}
+            >
               My Cart
             </a>
-            <a href="#" className="text-[16.67px]">
+            <a
+              href="/orders"
+              className={clsx("text-[16.67px]", {
+                "underline font-bold": router.pathname === "/orders",
+              })}
+            >
               Orders
             </a>
           </div>
