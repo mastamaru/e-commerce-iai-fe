@@ -76,10 +76,31 @@ const CartPage = () => {
   );
   const shipping = 44000;
 
-  const handleOrder = () => {
-    alert("Order placed successfully!");
-  };
+  const handleOrder = async () => {
+    const items = cartItems.map((item) => ({
+      name: item.name,
+      size: item.size,
+      quantity: item.quantity,
+    }));
+    const orderTotal = `Rp ${(total + shipping).toLocaleString()}`;
 
+    try {
+      const response = await axios.post(
+        "https://iai-order-be.vercel.app/api/orders",
+        {
+          items,
+          total: orderTotal,
+          status: "Waiting Payment",
+          userId: "IAI12",
+        }
+      );
+      alert("Order placed successfully!");
+      console.log("Order placed:", response.data);
+    } catch (error) {
+      console.error("Error placing order:", error);
+      alert("Error placing order. Please try again.");
+    }
+  };
   const handleBack = () => {
     router.push("/home");
   };
