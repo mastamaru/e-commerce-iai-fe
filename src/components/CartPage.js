@@ -10,6 +10,7 @@ const CartPage = () => {
   const router = useRouter();
   const [cartItems, setCartItems] = useState([]);
   const [products, setProducts] = useState([]);
+  const [shipping, setShipping] = useState(0);
 
   useEffect(() => {
     const fetchCartAndProductItems = async () => {
@@ -69,11 +70,26 @@ const CartPage = () => {
       console.error("Error removing product from cart:", error);
     }
   };
-
+  const handleShippingFeeChange = (fee) => {
+    setShipping(fee);
+  };
   const total = cartItems.reduce(
     (sum, item) => sum + item.price * item.quantity,
     0
   );
+
+  const clearCart = async () => {
+    try {
+      for (const item of cartItems) {
+        await axios.delete("https://e-commerce-iai.vercel.app/api/cart", {
+          data: { userId: "IAI12", name: item.name },
+        });
+      }
+      setCartItems([]);
+    } catch (error) {
+      console.error("Error clearing cart:", error);
+    }
+  };
 
   const handleOrder = async () => {
     const items = cartItems.map((item) => ({
@@ -95,11 +111,14 @@ const CartPage = () => {
       );
       alert("Order placed successfully!");
       console.log("Order placed:", response.data);
+      await clearCart();
+      router.push("/orders");
     } catch (error) {
       console.error("Error placing order:", error);
       alert("Error placing order. Please try again.");
     }
   };
+
   const handleBack = () => {
     router.push("/home");
   };
@@ -136,7 +155,11 @@ const CartPage = () => {
           <b>&lt;</b> Back to Shopping
         </button>
       </div>
-      <OrderSummary total={total} onOrder={handleOrder} />
+      <OrderSummary
+        total={total}
+        onShippingFeeChange={handleShippingFeeChange}
+        onOrder={handleOrder}
+      />
     </div>
   );
 };

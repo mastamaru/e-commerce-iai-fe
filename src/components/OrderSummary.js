@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import styles from "../styles/CartPage.module.css";
 
-const OrderSummary = ({ total, onOrder }) => {
+const OrderSummary = ({ total, onOrder, onShippingFeeChange }) => {
   const [address, setAddress] = useState("");
   const [cityDestination, setCityDestination] = useState("");
   const [userCity, setUserCity] = useState("");
@@ -49,8 +49,10 @@ const OrderSummary = ({ total, onOrder }) => {
       const costs = response.data.costs;
       if (costs.length > 0) {
         setShippingFee(costs[0].cost);
+        onShippingFeeChange(costs[0].cost); // Update shipping fee in parent component
       } else {
         setShippingFee(0);
+        onShippingFeeChange(0);
       }
     } catch (error) {
       console.error("Error calculating shipping cost:", error);
