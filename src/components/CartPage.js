@@ -1,4 +1,4 @@
-// src/components/CartPage.js
+/// src/components/CartPage.js
 import React, { useState } from 'react';
 import CartItem from './CartItem';
 import OrderSummary from './OrderSummary';
@@ -27,6 +27,9 @@ const CartPage = () => {
 
     return (
         <div className={styles.cartPage}>
+            <div>
+                <h2>Your Cart</h2>
+            </div>
             <div className={styles.cartItems}>
                 <table className={styles.cartTable}>
                     <thead>
