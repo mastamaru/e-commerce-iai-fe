@@ -2,6 +2,7 @@ import Head from "next/head";
 import Image from "next/image";
 import Input from "@/components/InputText";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 export default function Orders() {
   const orders = [
@@ -88,7 +89,7 @@ export default function Orders() {
         <Navbar />
       </header>
 
-      <main className="container mx-auto px-4 py-8">
+      <main className="container mx-auto px-4 py-8 h-[1200px]">
         <h1 className="text-3xl font-bold mb-6">Orders History</h1>
         <div className="bg-white shadow overflow-hidden sm:rounded-lg">
           <table className="min-w-full divide-y divide-gray-200">
@@ -146,17 +147,7 @@ export default function Orders() {
         </div>
       </main>
 
-      <footer className="bg-gray-200 py-4">
-        <div className="container mx-auto px-4 flex justify-center items-center">
-          <Image
-            src="/pererek-shop.png"
-            width={209}
-            height={60}
-            alt="shop logo"
-            className="absolute left-0 bottom-[3%]"
-          />
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }
