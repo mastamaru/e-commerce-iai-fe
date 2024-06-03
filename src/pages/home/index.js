@@ -37,10 +37,14 @@ export default function HomeUser() {
       toast.success("Product added to cart!");
       console.log("Product added to cart:", response.data);
     } catch (error) {
-      toast.error("Error adding product to cart!");
+      toast.error(
+        "Error, Product have been Sold! Please choose another product!"
+      );
       console.error("Error adding product to cart:", error);
+      console.log(error.response.data);
     }
   };
+
   return (
     <>
       <Navbar />
