@@ -8,24 +8,14 @@ export default function Product({
   image = "/pererek-ts.png",
   addCart = () => {},
 }) {
-  const [selectedSize, setSelectedSize] = useState({
-    s: false,
-    m: false,
-    l: false,
-  });
+  const [selectedSize, setSelectedSize] = useState("");
 
   const handleSizeClick = (size) => {
-    setSelectedSize((prev) => ({
-      ...prev,
-      [size]: !prev[size],
-    }));
+    setSelectedSize(size);
   };
 
   const getSelectedSize = () => {
-    if (selectedSize.s) return "S";
-    if (selectedSize.m) return "M";
-    if (selectedSize.l) return "L";
-    return null;
+    return selectedSize;
   };
 
   const handleAddToCart = () => {
@@ -36,16 +26,12 @@ export default function Product({
     }
     addCart(name, size);
     // Reset selected size
-    setSelectedSize({
-      s: false,
-      m: false,
-      l: false,
-    });
+    setSelectedSize("");
   };
 
-  const ready_s = selectedSize.s ? "/size-s-r.png" : "/size-s.png";
-  const ready_m = selectedSize.m ? "/size-m-r.png" : "/size-m-s.png";
-  const ready_l = selectedSize.l ? "/size-l-r.png" : "/size-l-s.png";
+  const ready_s = selectedSize === "S" ? "/size-s-r.png" : "/size-s.png";
+  const ready_m = selectedSize === "M" ? "/size-m-r.png" : "/size-m-s.png";
+  const ready_l = selectedSize === "L" ? "/size-l-r.png" : "/size-l-s.png";
 
   const formatPrice = (price) => {
     return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
@@ -63,19 +49,19 @@ export default function Product({
           src={ready_s}
           alt="size-s"
           className="cursor-pointer"
-          onClick={() => handleSizeClick("s")}
+          onClick={() => handleSizeClick("S")}
         />
         <img
           src={ready_m}
           alt="size-m"
           className="cursor-pointer"
-          onClick={() => handleSizeClick("m")}
+          onClick={() => handleSizeClick("M")}
         />
         <img
           src={ready_l}
           alt="size-l"
           className="cursor-pointer"
-          onClick={() => handleSizeClick("l")}
+          onClick={() => handleSizeClick("L")}
         />
         <p className="text-primary font-semibold text-[16.67px] text-center">
           |
