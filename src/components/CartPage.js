@@ -27,9 +27,6 @@ const CartPage = () => {
 
     return (
         <div className={styles.cartPage}>
-            <div>
-                <h2>Your Cart</h2>
-            </div>
             <div className={styles.cartItems}>
                 <table className={styles.cartTable}>
                     <thead>
@@ -39,7 +36,7 @@ const CartPage = () => {
                             <th>Price</th>
                             <th>Quantity</th>
                             <th>Total</th>
-                            <th>Action</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -53,6 +50,10 @@ const CartPage = () => {
                         ))}
                     </tbody>
                 </table>
+                <br></br>
+                <button className="bg-primary py-[10px] px-[17px] text-white">
+                    <b>&lt;</b> Back to Shopping
+                </button>
             </div>
             <OrderSummary total={total} shipping={shipping} onOrder={handleOrder} />
         </div>
