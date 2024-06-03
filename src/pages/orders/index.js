@@ -1,42 +1,41 @@
 import Head from "next/head";
-import Image from "next/image";
-import Input from "@/components/InputText";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 export default function Orders() {
-  const orders = [
-    {
-      orderId: "20240521XXXX",
-      date: "21 May 2024",
-      items: [
-        { name: "WGAMING Impossible Black Tee", size: "L", qty: 2 },
-        { name: "PRX Dino Tracksuit Pants", size: "M", qty: 1 },
-      ],
-      orderTotal: "Rp 2.279.000",
-      status: "Waiting Payment",
-    },
-    {
-      orderId: "20240521XXXX",
-      date: "21 May 2024",
-      items: [
-        { name: "WGAMING Impossible Black Tee", size: "L", qty: 2 },
-        { name: "PRX Dino Tracksuit Pants", size: "M", qty: 1 },
-      ],
-      orderTotal: "Rp 2.279.000",
-      status: "Waiting Payment",
-    },
-    {
-      orderId: "20240521XXXX",
-      date: "21 May 2024",
-      items: [
-        { name: "WGAMING Impossible Black Tee", size: "L", qty: 2 },
-        { name: "PRX Dino Tracksuit Pants", size: "M", qty: 1 },
-      ],
-      orderTotal: "Rp 2.279.000",
-      status: "Waiting Payment",
-    },
-  ];
+  const [orders, setOrders] = useState([]);
+
+  useEffect(() => {
+    const fetchOrders = async () => {
+      try {
+        const response = await axios.get(
+          "https://iai-order-be.vercel.app/api/orders/IAI12"
+        );
+        const ordersData = response.data.map((order, index) => ({
+          ...order,
+          orderId: `2024${new Date(order.date)
+            .toISOString()
+            .slice(5, 7)}${new Date(order.date).toISOString().slice(8, 10)}${(
+            index + 1
+          )
+            .toString()
+            .padStart(4, "0")}`,
+          date: new Date(order.date).toLocaleDateString("en-GB", {
+            day: "2-digit",
+            month: "short",
+            year: "numeric",
+          }),
+        }));
+        setOrders(ordersData);
+      } catch (error) {
+        console.error("Error fetching order data:", error);
+      }
+    };
+
+    fetchOrders();
+  }, []);
 
   return (
     <div className="bg-gray-100 min-h-screen">
@@ -46,46 +45,6 @@ export default function Orders() {
       </Head>
 
       <header className="bg-white shadow">
-        {/* <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-          <Image
-            src="/pererek.png"
-            width={0}
-            height={0}
-            sizes="100vw"
-            style={{ width: "44px", height: "auto" }}
-            alt="hero"
-          />
-          <nav>
-            <ul className="flex space-x-4">
-              <li>
-                <a href="#" className="text-gray-700 hover:text-gray-900">
-                  Home
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-gray-700 hover:text-gray-900">
-                  My cart
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="text-gray-700 hover:text-gray-900 underline"
-                >
-                  Orders
-                </a>
-              </li>
-            </ul>
-          </nav>
-          <div className="flex items-center space-x-2">
-            <span className="text-gray-700">Hi, Hiera</span>
-            <img
-              src="/hero.png"
-              alt="User Avatar"
-              className="w-8 h-8 rounded-full"
-            />
-          </div>
-        </div> */}
         <Navbar />
       </header>
 
@@ -117,30 +76,56 @@ export default function Orders() {
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
               {orders.map((order) => (
-                <tr key={order.orderId}>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    {order.orderId}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">{order.date}</td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    {order.items.map((item, index) => (
-                      <div key={index}>
-                        {item.name} Size: {item.size} ({item.qty})
-                      </div>
-                    ))}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    {order.items.reduce((acc, item) => acc + item.qty, 0)}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    {order.orderTotal}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <button className="px-4 py-2 text-sm font-medium text-black border border-black bg-white-500">
-                      {order.status}
-                    </button>
-                  </td>
-                </tr>
+                <React.Fragment key={order._id}>
+                  {order.items.map((item, index) => (
+                    <tr key={index}>
+                      {index === 0 && (
+                        <td
+                          className="px-6 py-4 whitespace-nowrap"
+                          rowSpan={order.items.length}
+                        >
+                          {order.orderId}
+                        </td>
+                      )}
+                      {index === 0 && (
+                        <td
+                          className="px-6 py-4 whitespace-nowrap"
+                          rowSpan={order.items.length}
+                        >
+                          {order.date}
+                        </td>
+                      )}
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <span className="font-sarala">{item.name} </span>
+                        <br />
+                        <span className="font-sarala font-bold">
+                          Size: {item.size}
+                        </span>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        {item.quantity}
+                      </td>
+                      {index === 0 && (
+                        <td
+                          className="px-6 py-4 whitespace-nowrap"
+                          rowSpan={order.items.length}
+                        >
+                          {order.total}
+                        </td>
+                      )}
+                      {index === 0 && (
+                        <td
+                          className="px-6 py-4 whitespace-nowrap"
+                          rowSpan={order.items.length}
+                        >
+                          <button className="px-4 py-2 text-sm font-medium text-black border border-black bg-white-500">
+                            {order.status}
+                          </button>
+                        </td>
+                      )}
+                    </tr>
+                  ))}
+                </React.Fragment>
               ))}
             </tbody>
           </table>
