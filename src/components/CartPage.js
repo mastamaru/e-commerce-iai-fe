@@ -74,7 +74,6 @@ const CartPage = () => {
     (sum, item) => sum + item.price * item.quantity,
     0
   );
-  const shipping = 44000;
 
   const handleOrder = async () => {
     const items = cartItems.map((item) => ({
@@ -137,7 +136,7 @@ const CartPage = () => {
           <b>&lt;</b> Back to Shopping
         </button>
       </div>
-      <OrderSummary total={total} shipping={shipping} onOrder={handleOrder} />
+      <OrderSummary total={total} onOrder={handleOrder} />
     </div>
   );
 };
