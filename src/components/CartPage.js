@@ -1,41 +1,73 @@
 /// src/components/CartPage.js
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import CartItem from "./CartItem";
 import OrderSummary from "./OrderSummary";
 import styles from "../styles/CartPage.module.css";
 import { useRouter } from "next/router";
+import axios from "axios";
 
 const CartPage = () => {
   const router = useRouter();
-  const [cartItems, setCartItems] = useState([
-    {
-      id: 1,
-      name: "WGAMING Impossible Black Tee",
-      size: "L",
-      price: 745000,
-      quantity: 2,
-      image: "/black-tee.png",
-    },
-    {
-      id: 2,
-      name: "PRX Dino Tracksuit Pants",
-      size: "M",
-      price: 745000,
-      quantity: 2,
-      image: "/tracksuit-pants.png",
-    },
-  ]);
+  const [cartItems, setCartItems] = useState([]);
+  const [products, setProducts] = useState([]);
 
-  const handleQuantityChange = (product, newQuantity) => {
-    setCartItems(
-      cartItems.map((item) =>
-        item.id === product.id ? { ...item, quantity: newQuantity } : item
+  useEffect(() => {
+    const fetchCartAndProductItems = async () => {
+      try {
+        // Fetch products
+        const productsResponse = await axios.get(
+          "https://e-commerce-iai.vercel.app/api/product"
+        );
+        const productsData = productsResponse.data;
+
+        // Fetch cart items
+        const cartResponse = await axios.get(
+          "https://e-commerce-iai.vercel.app/api/cart/IAI12"
+        );
+        const cartData = cartResponse.data;
+
+        // Map cart items with product details
+        const combinedData = cartData.map((cartItem) => {
+          const productDetails = productsData.find(
+            (product) => product.name === cartItem.name
+          );
+          return {
+            ...cartItem,
+            price: productDetails?.price || 0,
+            image: productDetails?.image || "",
+          };
+        });
+
+        setCartItems(combinedData);
+        setProducts(productsData);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchCartAndProductItems();
+  }, []);
+
+  const handleQuantityChange = (productName, newQuantity) => {
+    setCartItems((prevItems) =>
+      prevItems.map((item) =>
+        item === productName ? { ...item, quantity: newQuantity } : item
       )
     );
   };
 
-  const handleRemove = (product) => {
-    setCartItems(cartItems.filter((item) => item.id !== product.id));
+  const handleRemove = async (product) => {
+    try {
+      await axios.delete("https://e-commerce-iai.vercel.app/api/cart", {
+        data: {
+          userId: "IAI12",
+          name: product.name,
+        },
+      });
+      setCartItems(cartItems.filter((item) => item.id !== product.id));
+    } catch (error) {
+      console.error("Error removing product from cart:", error);
+    }
   };
 
   const total = cartItems.reduce(
@@ -51,7 +83,6 @@ const CartPage = () => {
   const handleBack = () => {
     router.push("/home");
   };
-
   return (
     <div className={styles.cartPage}>
       <div className={styles.cartItems}>
@@ -69,7 +100,7 @@ const CartPage = () => {
           <tbody>
             {cartItems.map((item) => (
               <CartItem
-                key={item.id}
+                key={item}
                 product={item}
                 onQuantityChange={handleQuantityChange}
                 onRemove={handleRemove}
