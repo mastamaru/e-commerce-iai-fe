@@ -74,14 +74,14 @@ export default function Orders() {
                 </th>
               </tr>
             </thead>
-            <tbody className="bg-white divide-y divide-gray-200">
+            <tbody className="bg-white divide-y divide-gray-200 font-sarala text-primary ">
               {orders.map((order) => (
                 <React.Fragment key={order._id}>
                   {order.items.map((item, index) => (
                     <tr key={index}>
                       {index === 0 && (
                         <td
-                          className="px-6 py-4 whitespace-nowrap"
+                          className="px-6 py-4 whitespace-nowrap text-[16.7px] leading-5"
                           rowSpan={order.items.length}
                         >
                           {order.orderId}
@@ -89,14 +89,14 @@ export default function Orders() {
                       )}
                       {index === 0 && (
                         <td
-                          className="px-6 py-4 whitespace-nowrap"
+                          className="px-6 py-4 whitespace-nowrap text-[16.7px] leading-5"
                           rowSpan={order.items.length}
                         >
                           {order.date}
                         </td>
                       )}
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <span className="font-sarala">{item.name} </span>
+                        {item.name}
                         <br />
                         <span className="font-sarala font-bold">
                           Size: {item.size}
@@ -110,7 +110,9 @@ export default function Orders() {
                           className="px-6 py-4 whitespace-nowrap"
                           rowSpan={order.items.length}
                         >
-                          {order.total}
+                          <span className="font-bold text-[16.7px] leading-[24px]">
+                            {order.total}
+                          </span>
                         </td>
                       )}
                       {index === 0 && (
