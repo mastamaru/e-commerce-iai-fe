@@ -80,10 +80,13 @@ const OrderSummary = ({ total, shipping, onOrder }) => {
                 <span>Rp {total.toLocaleString()}</span>
             </div>
             <div className={`${styles.summaryItem} ${styles.summaryItemTotal}`}>
-                <span>Total:</span>
+                <span>Total: </span>
                 <span>Rp {(total + shipping).toLocaleString()}</span>
             </div>
-            <button className="bg-primary py-[10px] px-[150px] text-white" onClick={handleOrder}>Order Now</button>
+            <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
+                <button className="bg-primary py-[10px] px-[150px] text-white" onClick={handleOrder}>Order Now</button>
+            </div>
+            
         </div>
     );
 };
