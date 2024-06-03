@@ -39,26 +39,32 @@ export default function Product({
 
   return (
     <div className="flex flex-col items-center h-[288px]">
-      <img src={image} alt="product" />
+      <Image src={`/${image}`} alt="product" width={288} height={288} />
       <div className="flex flex-col gap-1 text-primary text-[16.7px] leading-[24px] text-center font-semibold">
         <h1>{name}</h1>
         <p>Rp {formatPrice(price)}</p>
       </div>
       <div className="flex gap-3.5 w-[180px] items-center align-middle justify-center">
-        <img
+        <Image
           src={ready_s}
+          width={32}
+          height={32}
           alt="size-s"
           className="cursor-pointer"
           onClick={() => handleSizeClick("S")}
         />
-        <img
+        <Image
           src={ready_m}
+          width={32}
+          height={32}
           alt="size-m"
           className="cursor-pointer"
           onClick={() => handleSizeClick("M")}
         />
-        <img
+        <Image
           src={ready_l}
+          width={32}
+          height={32}
           alt="size-l"
           className="cursor-pointer"
           onClick={() => handleSizeClick("L")}
