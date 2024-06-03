@@ -4,7 +4,7 @@ export default function Footer() {
   return (
     <>
       <section>
-        <div className="relative w-full min-h-[400px] bg-secondary">
+        <div className="relative w-full min-h-[400px]  bg-bgsecondary">
           <Image
             src="/pererek-shop.png"
             width={209}
