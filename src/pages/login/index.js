@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Input from "@/components/InputText";
+import Link from "next/link";
 
 export default function Login() {
   return (
@@ -36,9 +37,9 @@ export default function Login() {
               </div>
               <p className="text-[16.67px] font-sarala mt-4">
                 Don't have an account?{" "}
-                <a href="#" className="font-bold">
-                  Sign up here
-                </a>
+                <Link legacyBehavior href="/register">
+                  <a className="font-bold">Sign up here</a>
+                </Link>
               </p>
             </div>
           </div>
@@ -47,4 +48,3 @@ export default function Login() {
     </main>
   );
 }
-
