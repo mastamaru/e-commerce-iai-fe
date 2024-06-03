@@ -3,6 +3,7 @@ import InputText from "../components/InputText";
 import Navbar from "@/components/Navbar";
 import Product from "@/components/Product";
 import { MdAddShoppingCart } from "react-icons/md";
+import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
@@ -29,6 +30,7 @@ export default function Home() {
         <Navbar />
         <Product />
       </div>
+      <Footer />
     </>
   );
 }
