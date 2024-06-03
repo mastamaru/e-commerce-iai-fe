@@ -1,4 +1,4 @@
-// src/components/CartItem.js
+/// src/components/CartItem.js
 import React from 'react';
 import styles from '../styles/CartPage.module.css';
 

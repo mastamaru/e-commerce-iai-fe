@@ -1,4 +1,3 @@
-// src/components/OrderSummary.js
 import React, { useState } from 'react';
 import styles from '../styles/CartPage.module.css';
 

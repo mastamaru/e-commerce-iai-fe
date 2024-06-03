@@ -1,4 +1,4 @@
-// src/components/CartPage.js
+/// src/components/CartPage.js
 import React, { useState } from 'react';
 import CartItem from './CartItem';
 import OrderSummary from './OrderSummary';
