@@ -1,6 +1,8 @@
 import Image from "next/image";
 import InputText from "../components/InputText";
 import Navbar from "@/components/Navbar";
+import Product from "@/components/Product";
+import { MdAddShoppingCart } from "react-icons/md";
 
 export default function Home() {
   return (
@@ -25,6 +27,7 @@ export default function Home() {
         </div>
         <InputText label="Email" type="email" />
         <Navbar />
+        <Product />
       </div>
     </>
   );
