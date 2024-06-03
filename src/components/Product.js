@@ -39,7 +39,7 @@ export default function Product({
 
   return (
     <div className="flex flex-col items-center h-[288px]">
-      <Image src={`/${image}`} alt="product" width={288} height={288} />
+      <Image src={`${image}`} alt="product" width={288} height={288} />
       <div className="flex flex-col gap-1 text-primary text-[16.7px] leading-[24px] text-center font-semibold">
         <h1>{name}</h1>
         <p>Rp {formatPrice(price)}</p>
