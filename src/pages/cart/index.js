@@ -6,8 +6,8 @@ import Footer from "@/components/Footer";
 
 const Cart = () => {
   const containerStyle = {
-    marginLeft: "100px", // Atur margin sesuai kebutuhan
-    marginRight: "100px", // Atur margin sesuai kebutuhan
+    marginLeft: "100px", 
+    marginRight: "100px", 
   };
 
   return (
