@@ -103,30 +103,32 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 90vh; /* Adjusted height for larger view */
+  height: 60vh; /* Adjusted height for larger view */
   text-align: center; /* Teks dan tombol disusun rapi (rata) */
   background-color: #f9f9f9;
 }
 
 .confirmationContainer {
   background-color: #fff;
-  padding: 3rem; /* Increased padding */
+  padding: 2rem;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  max-width: 800px; /* Increased max-width */
+  max-width: 1000px;
   width: 100%;
 }
 
 .imageAndText {
   display: flex;
-  flex-direction: column; /* Mengatur teks dan tombol dalam satu kolom */
-  align-items: center; /* Teks dan tombol disusun rapi (rata) secara horizontal */
+  align-items: center; /* Teks dan gambar disusun rapi (rata) secara vertikal */
+}
+
+.imageContainer {
+  margin-right: 20px; /* Jarak antara gambar dan teks */
 }
 
 .confirmationImage {
   width: 300px;
   height: auto;
-  margin-bottom: 20px; /* Menambah jarak bawah gambar */
 }
 
 .textContainer {
