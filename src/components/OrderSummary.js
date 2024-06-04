@@ -65,6 +65,7 @@ const OrderSummary = ({ total, onOrder, onShippingFeeChange }) => {
     } else {
       onOrder();
       alert("Order placed successfully!");
+      window.location.href = '/confirmation';
     }
   };
 
