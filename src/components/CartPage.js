@@ -15,32 +15,34 @@ const CartPage = () => {
   useEffect(() => {
     const fetchCartAndProductItems = async () => {
       try {
-        // Fetch products
         const productsResponse = await axios.get(
           "https://e-commerce-iai.vercel.app/api/product"
         );
         const productsData = productsResponse.data;
 
-        // Fetch cart items
         const cartResponse = await axios.get(
           "https://e-commerce-iai.vercel.app/api/cart/IAI12"
         );
         const cartData = cartResponse.data;
 
-        // Map cart items with product details
         const combinedData = cartData.map((cartItem) => {
           const productDetails = productsData.find(
             (product) => product.name === cartItem.name
           );
+          if (!productDetails) {
+            console.error(`Product not found for item: ${cartItem.name}`);
+          }
           return {
             ...cartItem,
             price: productDetails?.price || 0,
             image: productDetails?.image || "",
+            productId: productDetails?._id || "", // Ensure productId is included
           };
         });
 
         setCartItems(combinedData);
         setProducts(productsData);
+        console.log(combinedData); // Debugging log
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -100,6 +102,7 @@ const CartPage = () => {
     const orderTotal = `Rp ${(total + shipping).toLocaleString()}`;
 
     try {
+      // Place the order
       const response = await axios.post(
         "https://iai-order-be.vercel.app/api/orders",
         {
@@ -109,10 +112,36 @@ const CartPage = () => {
           userId: "IAI12",
         }
       );
-      alert("Order placed successfully!");
       console.log("Order placed:", response.data);
-      await clearCart();
-      router.push("/orders");
+
+      // Update stock for each product
+      for (const item of items) {
+        // Fetch current product details
+        const productResponse = await axios.get(
+          `https://e-commerce-iai.vercel.app/api/product/${encodeURIComponent(
+            item.name
+          )}`
+        );
+        const product = productResponse.data;
+
+        // Calculate new stock
+        const updatedSize = { ...product.size };
+        updatedSize[item.size] = updatedSize[item.size] - item.quantity;
+
+        // Update product with new stock
+        await axios.post(
+          `https://e-commerce-iai.vercel.app/api/product/edit/${encodeURIComponent(
+            item.name
+          )}`,
+          {
+            size: updatedSize,
+          }
+        );
+      }
+
+      alert("Order placed successfully!");
+      // await clearCart();
+      // router.push("/orders");
     } catch (error) {
       console.error("Error placing order:", error);
       alert("Error placing order. Please try again.");
