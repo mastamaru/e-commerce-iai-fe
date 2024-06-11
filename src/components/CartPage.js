@@ -140,8 +140,8 @@ const CartPage = () => {
       }
 
       alert("Order placed successfully!");
-      // await clearCart();
-      // router.push("/orders");
+      await clearCart();
+      router.push("/confirmation");
     } catch (error) {
       console.error("Error placing order:", error);
       alert("Error placing order. Please try again.");
